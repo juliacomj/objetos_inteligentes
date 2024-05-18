@@ -92,12 +92,12 @@ void loop() {
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
 
+  long startCommand = millis();
+
   // Leitura das acelerações nos eixos x, y e z
   float ax = a.acceleration.x;
   float ay = a.acceleration.y;
   float az = a.acceleration.z;
-
-  //Reconecta o client se necessário
   if (!client.connected()) {
     reconnect();
   }
@@ -113,16 +113,23 @@ void loop() {
   if(fastAccelaration == true && totalAcceleration < 1.0){
      Serial.println("Queda detectada!");
      client.publish("queda/topic", "Queda detectada!!");
+     Serial.println("--TEMPO DE RESPOSTA QUEDA DETECTADA--");
+     Serial.print(millis() - startCommand);
      digitalWrite(LED, HIGH);    
   } else{
-     fastAccelaration = false;
-     digitalWrite(LED, LOW);
+    Serial.println("--TEMPO DE RESPOSTA--");
+    Serial.print(millis() - startCommand);
+    fastAccelaration = false;
+    digitalWrite(LED, LOW);
   }
 
   if (totalAcceleration > 12.0) {
       fastAccelaration = true;
   }
 
+
   delay(2000); // Aguarde um curto período antes de fazer a próxima leitura
 
 }
+
+
