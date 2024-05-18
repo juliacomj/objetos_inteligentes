@@ -36,8 +36,9 @@ O protocolo MQTT é utilizado para a troca de mensagens de forma eficiente e lev
 A ESP32 conecta-se ao broker MQTT através da internet, permitindo o envio de notificações de queda para qualquer dispositivo conectado à rede que esteja inscrito no tópico específico.
 
 ## Para acessar o projeto no wokwi:
-
 ### [Detector de queda](https://wokwi.com/projects/398051066286793729)
+- Clique no botão de seta "Start Simulation"
+- Após a compilação, a conexão WiFi e a conexão com o broker, clique no sensor MPU6050 para alterar a aceleração da queda. 
 
 ## Para realizar a conexão a com broker
 
